@@ -26,7 +26,11 @@ backend:
   database:
     client: better-sqlite3
     connection: ':memory:'
-
+  jenkins:
+    baseUrl: http://localhost:8080
+    username: bramos
+    projectCountLimit: 100
+    apiKey: 116815d3e14ab1e549c7c4479a83c3f9b8
 integrations:
   github:
     - host: github.com
@@ -63,6 +67,7 @@ catalog:
 jenkins:
   instances:
     - name: default
-      baseUrl: https://jenkins.example.com
-      username: backstage-bot
-      apiKey: 123456789abcdef0123456789abcedf012
+      baseUrl: http://localhost:8080
+      username: bramos
+      projectCountLimit: 100
+      apiKey: 116815d3e14ab1e549c7c4479a83c3f9b8

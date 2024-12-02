@@ -149,7 +149,7 @@ const overviewContent = (
     <EntitySwitch>
       <EntitySwitch.Case if={isJenkinsAvailable}>
         <Grid item md={6}>
-          <EntityLatestJenkinsRunCard branch="main,master" variant="gridItem" />
+          <EntityLatestJenkinsRunCard branch="" variant="gridItem" />
         </Grid>
       </EntitySwitch.Case>
     </EntitySwitch>

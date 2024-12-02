@@ -11,9 +11,10 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: example-website
+  name: artist-lookup
   annotations:
-    jenkins.io/job-full-name: 'folder-name/project-name'
+    jenkins.io/override-base-url: "http://localhost:8080"
+    jenkins.io/job-full-name: 'artist-lookup'
 spec:
   type: website
   lifecycle: experimental
