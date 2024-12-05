@@ -14,7 +14,7 @@ metadata:
   name: artist-lookup
   annotations:
     jenkins.io/override-base-url: "http://localhost:8080"
-    jenkins.io/job-full-name: 'artist-lookup'
+    jenkins.io/job-full-name: 'tssc-sample-sbom-scans'
 spec:
   type: website
   lifecycle: experimental
