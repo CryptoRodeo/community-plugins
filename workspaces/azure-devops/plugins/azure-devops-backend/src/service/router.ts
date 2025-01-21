@@ -387,7 +387,7 @@ export async function createRouter(
     const host = req.query.host?.toString();
     const org = req.query.org?.toString();
 
-    if (!isNaN(buildId)) {
+    if (isNaN(buildId)) {
       throw new InputError('Invalid buildId parameter');
     }
 
