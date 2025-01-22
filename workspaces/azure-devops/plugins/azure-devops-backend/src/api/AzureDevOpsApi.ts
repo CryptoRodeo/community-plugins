@@ -17,6 +17,7 @@
 import {
   Build,
   BuildDefinitionReference,
+  BuildLog,
 } from 'azure-devops-node-api/interfaces/BuildInterfaces';
 import {
   BuildRun,
@@ -587,7 +588,7 @@ export class AzureDevOpsApi {
     return { url, content };
   }
 
-  public async getBuildLogs(
+  public async getBuildLog(
     project: string,
     buildId: number,
     host?: string,
@@ -597,23 +598,25 @@ export class AzureDevOpsApi {
     const client = await webApi.getBuildApi();
 
     // Get and sort logs first
-    const logs = await client.getBuildLogs(project, buildId);
-    const sortedLogs = logs.sort((a, b) => a.id - b.id);
+    const logs: BuildLog[] = await client.getBuildLogs(project, buildId);
+    const sortedLogs: BuildLog[] = logs
+      .filter(log => log.id !== undefined)
+      .sort((a: BuildLog, b: BuildLog) => {
+        return a.id! - b.id!;
+      });
 
     // Fetch all log lines in parallel
-    const logLines = sortedLogs.map(log =>
-      client.getBuildLogLines(project, buildId, log.id, 0, log.lineCount),
-    );
+    const logLines: Promise<string[]>[] = sortedLogs
+      .filter(
+        (log: BuildLog) => log.id !== undefined && log.lineCount !== undefined,
+      )
+      .map((log: BuildLog) =>
+        client.getBuildLogLines(project, buildId, log.id!, 0, log.lineCount!),
+      );
 
     // Wait for all requests to complete
     const results = await Promise.all(logLines);
 
-    // Flatten and process results
-    return results.reduce((acc: string[], logForLine) => {
-      const lines = Array.isArray(logForLine)
-        ? logForLine
-        : logForLine.split('\n');
-      return [...acc, ...lines];
-    }, []);
+    return results.flat();
   }
 }
