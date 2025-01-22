@@ -803,7 +803,7 @@ describe('AzureDevOpsApi', () => {
   it('should get the build logs', async () => {
     const getBuildLogsResultMock = [
       {
-        lineCount: 23,
+        lineCount: 4,
         createdOn: '2025-01-21T18:20:14.220Z',
         lastChangedOn: '2025-01-21T18:20:14.810Z',
         id: 1,
@@ -811,7 +811,7 @@ describe('AzureDevOpsApi', () => {
         url: 'https://dev.azure.com/some-org/123abc/_apis/build/builds/8/log/1',
       },
       {
-        lineCount: 104,
+        lineCount: 4,
         createdOn: '2025-01-21T18:20:14.220Z',
         lastChangedOn: '2025-01-21T18:20:14.230Z',
         id: 2,
@@ -819,7 +819,7 @@ describe('AzureDevOpsApi', () => {
         url: 'https://dev.azure.com/some-org/123abc/_apis/build/builds/8/log/2',
       },
       {
-        lineCount: 37,
+        lineCount: 4,
         createdOn: '2025-01-21T18:20:15.733Z',
         lastChangedOn: '2025-01-21T18:20:15.740Z',
         id: 3,
@@ -827,7 +827,7 @@ describe('AzureDevOpsApi', () => {
         url: 'https://dev.azure.com/some-org/123abc/_apis/build/builds/8/log/3',
       },
       {
-        lineCount: 31,
+        lineCount: 4,
         createdOn: '2025-01-21T18:20:22.580Z',
         lastChangedOn: '2025-01-21T18:20:24.517Z',
         id: 4,
