@@ -71,6 +71,7 @@ describe('createRouter', () => {
       getAllTeams: jest.fn(),
       getTeamMembers: jest.fn(),
       getReadme: jest.fn(),
+      getBuildLog: jest.fn(),
     } as any;
 
     const config = new ConfigReader({
@@ -706,12 +707,55 @@ describe('createRouter', () => {
       expect(response.status).toEqual(400);
     });
   });
+
+  describe('GET /builds/:projectName/log/:buildId', () => {
+    it('fetches the logs for a build', async () => {
+      const buildLog: string[] = [
+        'Starting pipeline',
+        'Section 1 - Step 1',
+        'Section 2 - Step 2',
+        'Section 3 - Step 3',
+        'Section 4 - Step 4',
+      ];
+
+      azureDevOpsApi.getBuildLog.mockResolvedValueOnce(buildLog);
+
+      mockedAuthorize.mockImplementationOnce(async () => [
+        { result: AuthorizeResult.ALLOW },
+      ]);
+
+      const response = await request(app)
+        .get('/builds/myProject/log/8')
+        .query({ entityRef: 'component:default/mycomponent' });
+
+      expect(azureDevOpsApi.getBuildLog).toHaveBeenCalledWith(
+        'myProject',
+        8,
+        undefined,
+        undefined,
+      );
+      expect(response.status).toEqual(200);
+      expect(response.body).toEqual({ log: buildLog });
+    });
+
+    it('throws InputError when invalid buildId passed', async () => {
+      mockedAuthorize.mockImplementationOnce(async () => [
+        { result: AuthorizeResult.ALLOW },
+      ]);
+      const response = await request(app)
+        .get('/builds/myProject/log/test')
+        .query({ entityRef: 'component:default/mycomponent' });
+
+      expect(azureDevOpsApi.getBuildLog).not.toHaveBeenCalled();
+      expect(response.status).toEqual(400);
+    });
+  });
 });
 
 function getReadmeMock() {
   return `
-    # Introduction 
-    TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+    # Introduction
+    TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project.
 
     # Getting Started
     TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
@@ -721,10 +765,10 @@ function getReadmeMock() {
     4.	API references
 
     # Build and Test
-    TODO: Describe and show how to build your code and run the tests. 
+    TODO: Describe and show how to build your code and run the tests.
 
     # Contribute
-    TODO: Explain how other users and developers can contribute to make your code better. 
+    TODO: Explain how other users and developers can contribute to make your code better.
 
     If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
     - [ASP.NET Core](https://github.com/aspnet/Home)
