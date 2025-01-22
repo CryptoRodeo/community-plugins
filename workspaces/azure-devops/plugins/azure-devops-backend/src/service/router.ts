@@ -381,7 +381,7 @@ export async function createRouter(
     res.status(200).json(readme);
   });
 
-  router.get('/builds/:projectName/logs/:buildId', async (req, res) => {
+  router.get('/builds/:projectName/log/:buildId', async (req, res) => {
     const { projectName } = req.params;
     const buildId = Number(req.params.buildId);
     const host = req.query.host?.toString();
@@ -412,7 +412,7 @@ export async function createRouter(
       throw new NotAllowedError('Unauthorized');
     }
 
-    const logForBuild = await azureDevOpsApi.getBuildLogs(
+    const logForBuild = await azureDevOpsApi.getBuildLog(
       projectName,
       Number(buildId),
       host,
