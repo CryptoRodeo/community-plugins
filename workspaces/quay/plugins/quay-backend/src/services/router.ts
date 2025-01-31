@@ -18,9 +18,9 @@ import {
   HttpAuthService,
   LoggerService,
   PermissionsService,
-} from '@backstage/backend-plugin-api/index';
+} from '@backstage/backend-plugin-api';
 import { Config } from '@backstage/config';
-import { NotAllowedError } from '@backstage/errors/index';
+import { NotAllowedError } from '@backstage/errors';
 import { AuthorizeResult } from '@backstage/plugin-permission-common';
 import { createPermissionIntegrationRouter } from '@backstage/plugin-permission-node';
 import express from 'express';
@@ -118,17 +118,11 @@ export async function createRouter(
     },
   );
 
-  router.get('/repository/:org/:repo/manifest/:digest', async (req, res) => {
-    const { org, repo, digest } = req.params;
-    const manifest = await quayApi.getManifestByDigest(org, repo, digest);
-
-    res.status(200).json(manifest);
-  });
-
   router.get(
-    '/repository/:org/:repo/manifest/:digest/security?vulnerabilities=true',
+    '/repository/:org/:repo/manifest/:digest/security',
     async (req, res) => {
       const { org, repo, digest } = req.params;
+
       const securityDetails = await quayApi.getSecurityDetails(
         org,
         repo,
@@ -138,6 +132,13 @@ export async function createRouter(
       res.status(200).json(securityDetails);
     },
   );
+
+  router.get('/repository/:org/:repo/manifest/:digest', async (req, res) => {
+    const { org, repo, digest } = req.params;
+    const manifest = await quayApi.getManifestByDigest(org, repo, digest);
+
+    res.status(200).json(manifest);
+  });
 
   return router;
 }
