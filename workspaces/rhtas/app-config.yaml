@@ -1,0 +1,43 @@
+app:
+  title: 'rhtas console'
+  baseUrl: http://localhost:3000
+
+backend:
+  baseUrl: http://localhost:7007
+  listen:
+    port: 7007
+
+  csp:
+    connect-src: ["'self'", 'http:', 'https:']
+
+  cors:
+    origin: http://localhost:3000
+    methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
+    credentials: true
+
+  database:
+    client: better-sqlite3
+    connection: ':memory:'
+
+auth:
+  providers:
+    guest: {}
+
+catalog:
+  import:
+    entityFilename: catalog-info.yaml
+    pullRequestBranchName: backstage-integration
+  rules:
+    - allow: [Component, System, API, Resource, Location]
+  locations:
+    - type: file
+      target: ../../examples/org.yaml
+      rules:
+        - allow: [User, Group]
+    - type: file
+      target: ../../examples/entities.yaml
+
+rhtas:
+  consoleUrl: http://localhost:8080
+  rekorUrl: https://rekor.sigstore.dev
+  tufRepoUrl: https://tuf-repo-cdn.sigstore.dev

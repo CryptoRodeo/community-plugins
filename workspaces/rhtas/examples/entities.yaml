@@ -1,0 +1,29 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: examples
+spec:
+  owner: guests
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: security-data
+  annotations:
+    rhtas.redhat.com/enabled: 'true'
+spec:
+  type: service
+  lifecycle: experimental
+  owner: guests
+  system: examples
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: example-service-without-rhtas
+spec:
+  type: service
+  lifecycle: experimental
+  owner: guests
+  system: examples

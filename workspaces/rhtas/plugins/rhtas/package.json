@@ -1,0 +1,102 @@
+{
+  "name": "@backstage-community/plugin-rhtas",
+  "version": "0.1.0",
+  "description": "Frontend plugin for Red Hat Trusted Artifact Signer (RHTAS)",
+  "backstage": {
+    "role": "frontend-plugin",
+    "pluginId": "rhtas",
+    "pluginPackages": [
+      "@backstage-community/plugin-rhtas",
+      "@backstage-community/plugin-rhtas-backend",
+      "@backstage-community/plugin-rhtas-common"
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://backstage.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/backstage/community-plugins",
+    "directory": "workspaces/rhtas/plugins/rhtas"
+  },
+  "license": "Apache-2.0",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "backstage-cli package build",
+    "clean": "backstage-cli package clean",
+    "lint": "backstage-cli package lint",
+    "prepack": "backstage-cli package prepack",
+    "postpack": "backstage-cli package postpack",
+    "start": "backstage-cli package start",
+    "test": "backstage-cli package test"
+  },
+  "dependencies": {
+    "@backstage-community/plugin-rhtas-common": "workspace:^",
+    "@backstage/catalog-model": "^1.7.7",
+    "@backstage/core-components": "^0.18.8",
+    "@backstage/core-plugin-api": "^1.12.4",
+    "@backstage/plugin-catalog-react": "^2.1.0",
+    "@backstage/theme": "^0.6.3",
+    "@patternfly/react-charts": "^8.0.0",
+    "@patternfly/react-core": "^6.0.0",
+    "@patternfly/react-icons": "^6.0.0",
+    "@patternfly/react-styles": "^6.0.0",
+    "@patternfly/react-table": "^6.0.0",
+    "@patternfly/react-tokens": "^6.0.0",
+    "@peculiar/asn1-schema": "^2.3.0",
+    "@peculiar/x509": "^1.12.0",
+    "@tanstack/react-query": "^5.0.0",
+    "@types/react": "^16.13.1 || ^17.0.0 || ^18.0.0",
+    "dayjs": "^1.11.0",
+    "js-yaml": "^4.1.0",
+    "pvtsutils": "^1.3.0",
+    "react-hook-form": "^7.0.0",
+    "react-syntax-highlighter": "^15.0.0",
+    "victory-area": "^37.3.6",
+    "victory-axis": "^37.3.6",
+    "victory-bar": "^37.3.6",
+    "victory-box-plot": "^37.3.6",
+    "victory-chart": "^37.3.6",
+    "victory-core": "^37.3.6",
+    "victory-create-container": "^37.3.6",
+    "victory-cursor-container": "^37.3.6",
+    "victory-group": "^37.3.6",
+    "victory-legend": "^37.3.6",
+    "victory-line": "^37.3.6",
+    "victory-pie": "^37.3.6",
+    "victory-scatter": "^37.3.6",
+    "victory-stack": "^37.3.6",
+    "victory-tooltip": "^37.3.6",
+    "victory-voronoi-container": "^37.3.6",
+    "victory-zoom-container": "^37.3.6"
+  },
+  "devDependencies": {
+    "@backstage/cli": "^0.36.0",
+    "@backstage/dev-utils": "^1.1.21",
+    "@backstage/test-utils": "^1.7.16",
+    "@testing-library/dom": "^10.0.0",
+    "@testing-library/jest-dom": "^6.0.0",
+    "@testing-library/react": "^15.0.0",
+    "@types/js-yaml": "^4.0.0",
+    "@types/react-dom": "^18.2.19",
+    "@types/react-syntax-highlighter": "^15.0.0",
+    "react": "^16.13.1 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.13.1 || ^17.0.0 || ^18.0.0",
+    "react-router-dom": "6.0.0-beta.0 || ^6.3.0"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.13.1 || ^17.0.0 || ^18.0.0",
+    "react-router-dom": "6.0.0-beta.0 || ^6.3.0"
+  }
+}

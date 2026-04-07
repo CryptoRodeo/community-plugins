@@ -1,0 +1,129 @@
+/*
+ * PatternFly-in-Backstage overrides.
+ *
+ * Backstage uses Material-UI, so PatternFly component CSS may not
+ * cascade properly.  These rules ensure PF6 components render with
+ * the correct backgrounds, borders and spacing inside the Backstage shell.
+ */
+
+/* ── Cards ─────────────────────────────────────────────────────── */
+.pf-v6-c-card {
+  background-color: var(
+    --pf-t--global--background--color--primary--default,
+    #ffffff
+  );
+  box-shadow: var(
+    --pf-v6-c-card--BoxShadow,
+    0 0.0625rem 0.125rem 0 rgba(3, 3, 3, 0.12),
+    0 0 0.125rem 0 rgba(3, 3, 3, 0.06)
+  );
+  border-radius: var(
+    --pf-v6-c-card--BorderRadius,
+    var(--pf-t--global--border--radius--medium, 8px)
+  );
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+/* ── Page sections ─────────────────────────────────────────────── */
+/* Give PatternFly PageSection a slightly recessed background so
+   cards visually stand out from their container. */
+.pf-v6-c-page__main-section {
+  background-color: var(
+    --pf-t--global--background--color--secondary--default,
+    #f5f5f5
+  );
+  border-radius: var(--pf-t--global--border--radius--medium, 8px);
+}
+
+/* PatternFly PageSection adds its own padding which compounds when
+   nested. Reset nested PageSections to avoid double-padding. */
+.pf-v6-c-page__main-section .pf-v6-c-page__main-section {
+  padding-inline: 0;
+}
+
+/* ── Tables ────────────────────────────────────────────────────── */
+.pf-v6-c-table {
+  background-color: var(
+    --pf-t--global--background--color--primary--default,
+    #ffffff
+  );
+}
+
+/* ── Tabs ──────────────────────────────────────────────────────── */
+.pf-v6-c-tabs {
+  background-color: transparent;
+}
+
+/* ── Toolbar ───────────────────────────────────────────────────── */
+.pf-v6-c-toolbar {
+  background-color: transparent;
+}
+
+/* ── Form elements within Backstage ────────────────────────────── */
+.pf-v6-c-form-control > input,
+.pf-v6-c-text-input-group__text-input {
+  background-color: var(
+    --pf-t--global--background--color--primary--default,
+    #ffffff
+  );
+}
+
+/* ── Dark mode adjustments ─────────────────────────────────────── */
+.pf-v6-theme-dark .pf-v6-c-page__main-section {
+  background-color: var(
+    --pf-t--global--background--color--secondary--default,
+    #151515
+  );
+  color: var(--pf-t--global--text--color--regular, #e0e0e0);
+}
+
+.pf-v6-theme-dark .pf-v6-c-card {
+  background-color: var(
+    --pf-t--global--background--color--primary--default,
+    #1b1d21
+  );
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.pf-v6-theme-dark .pf-v6-c-table {
+  background-color: var(
+    --pf-t--global--background--color--primary--default,
+    #1b1d21
+  );
+}
+
+.pf-v6-theme-dark .pf-v6-c-form-control > input,
+.pf-v6-theme-dark .pf-v6-c-text-input-group__text-input {
+  background-color: var(
+    --pf-t--global--background--color--primary--default,
+    #1b1d21
+  );
+}
+
+/* ── Dark mode text color fixes ───────────────────────────────── */
+/* Ensure PF6 content, labels, and empty states inherit dark text. */
+.pf-v6-theme-dark .pf-v6-c-content,
+.pf-v6-theme-dark .pf-v6-c-card__title,
+.pf-v6-theme-dark .pf-v6-c-form__label,
+.pf-v6-theme-dark .pf-v6-c-empty-state {
+  color: var(--pf-t--global--text--color--regular, #e0e0e0);
+}
+
+/* ── Dark mode chart text ─────────────────────────────────────── */
+/* PatternFly Victory charts use CSS variables for label fills.
+   Override donut title/subtitle and general chart label fills
+   so they are legible on dark backgrounds. */
+.pf-v6-theme-dark {
+  --pf-v6-chart-donut-label-title-Fill: var(
+    --pf-t--global--text--color--regular,
+    #e0e0e0
+  );
+  --pf-v6-chart-donut-label-subtitle-Fill: var(
+    --pf-t--global--text--color--regular,
+    #e0e0e0
+  );
+}
+
+.pf-v6-theme-dark .pf-v6-c-chart text {
+  fill: var(--pf-t--global--text--color--regular, #e0e0e0);
+}
